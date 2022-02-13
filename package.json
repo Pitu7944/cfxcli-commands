@@ -2,9 +2,9 @@
 	"name": "cfxcli-commands",
 	"displayName": "cfxcli-commands",
 	"description": "cfxcli-commands",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "Pitu7944",
-	"repository": "",
+	"repository": "https://github.com/Pitu7944/cfxcli-commands",
 	"engines": {
 		"vscode": "^1.34.0"
 	},
@@ -18,16 +18,34 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "cfxcli.restartCurrentScript",
+				"command": "extension.restartCurrentScript",
 				"title": "cfxcli: Restart Current Script"
 			},
 			{
-				"command": "cfxcli.stopCurrentScript",
+				"command": "extension.stopCurrentScript",
 				"title": "cfxcli: Stop Current Script"
 			},
 			{
-				"command": "cfxcli.startCurrentScript",
+				"command": "extension.startCurrentScript",
 				"title": "cfxcli: Start Current Script"
+			}
+		],
+		"configuration": [
+			{
+				"id": "cfxcli",
+				"title": "cfxcli Configuration",
+				"properties":{
+					"cfxcli.ip": {
+						"type": "string",
+						"default": "http://127.0.0.1:30120/cfxcli_server",
+						"description": "cfxcli server ip and resource name"
+					},
+					"cfxcli.api_key": {
+						"type": "string",
+						"default": "test_key",
+						"description": "cfxcli server api_key"
+					}
+				}
 			}
 		]
 	},
