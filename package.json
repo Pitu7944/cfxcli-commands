@@ -2,7 +2,7 @@
 	"name": "cfxcli-commands",
 	"displayName": "cfxcli-commands",
 	"description": "cfxcli-commands",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "Pitu7944",
 	"repository": "https://github.com/Pitu7944/cfxcli-commands",
 	"engines": {
@@ -12,7 +12,9 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.restartCurrentScript"
+		"onCommand:extension.restartCurrentScript",
+		"onCommand:extension.stopCurrentScript",
+		"onCommand:extension.startCurrentScript"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
