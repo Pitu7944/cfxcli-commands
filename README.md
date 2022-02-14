@@ -4,7 +4,7 @@
  Open PowerShell and enter the command below
 
 ```
-code --install-extension ./cfxcli-commands-0.0.5.vsix
+code --install-extension ./cfxcli-commands-0.0.7.vsix
 ```
 # 2. Configuration
  1. Open your project workspace.
