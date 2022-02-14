@@ -2,7 +2,30 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as path from 'path';
+import * as fs from 'fs';
 import axios from 'axios';
+
+function find_fxmanifest(scriptPath: string, currentDepth = 0) {
+	fs.readdir(scriptPath, (err, files: string[]) => {
+		let foundManifest = false;
+		files.forEach((file: string) => {
+			if (file.includes("__resource.lua") || file.includes("fxmanifest.lua")) {
+				console.log("znaleziono fxmanifest.lua lub __resource.lua");
+				console.log(`znaleziono w ${scriptPath}`);
+				foundManifest = true;
+				return file;
+			}
+		});
+		if (!foundManifest && currentDepth < 10) {
+			const currentpath = path.join(scriptPath, '../');
+			console.log(currentpath);
+			find_fxmanifest(currentpath, currentDepth + 1);
+		} else if(currentDepth >= 10) {
+			console.log("Nie znaleziono fxmanifest.lua lub __resource.lua");
+			vscode.window.showInformationMessage("Nie znaleziono fxmanifest.lua lub __resource.lua");
+		}
+	});
+}
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -11,12 +34,13 @@ export function activate(context: vscode.ExtensionContext) {
 		const vars = {
 			fileDirname: (vscode.window.activeTextEditor) ? path.dirname(vscode.window.activeTextEditor.document.fileName) : null,
 		};
-		const scriptName: any = vars['fileDirname']?.substring(vars['fileDirname']?.lastIndexOf('\\') + 1);
+		const scriptPath: string = vars['fileDirname']??"";
 		if (vscode.window.activeTextEditor) {
 			const currentDocument = vscode.window.activeTextEditor.document;
 			const configuration = vscode.workspace.getConfiguration('', currentDocument.uri);
 			const config_serverIP = configuration.get('cfxcli.ip', "");
 			const config_api_key = configuration.get('cfxcli.api_key', "");
+			const scriptName = find_fxmanifest(scriptPath);
 			axios.post(`${config_serverIP}/restart`, {api_key: config_api_key, target_script: scriptName}).then(function (response: { data: any; }) {
 				//decode data to json
 				const data = response.data;
@@ -37,12 +61,13 @@ export function activate(context: vscode.ExtensionContext) {
 		const vars = {
 			fileDirname: (vscode.window.activeTextEditor) ? path.dirname(vscode.window.activeTextEditor.document.fileName) : null,
 		};
-		const scriptName: any = vars['fileDirname']?.substring(vars['fileDirname']?.lastIndexOf('\\') + 1);
+		const scriptPath: string = vars['fileDirname']??"";
 		if (vscode.window.activeTextEditor) {
 			const currentDocument = vscode.window.activeTextEditor.document;
 			const configuration = vscode.workspace.getConfiguration('', currentDocument.uri);
 			const config_serverIP = configuration.get('cfxcli.ip', "");
 			const config_api_key = configuration.get('cfxcli.api_key', "");
+			const scriptName = find_fxmanifest(scriptPath);
 			axios.post(`${config_serverIP}/start`, {api_key: config_api_key, target_script: scriptName}).then(function (response: { data: any; }) {
 				//decode data to json
 				const data = response.data;
@@ -63,12 +88,13 @@ export function activate(context: vscode.ExtensionContext) {
 		const vars = {
 			fileDirname: (vscode.window.activeTextEditor) ? path.dirname(vscode.window.activeTextEditor.document.fileName) : null,
 		};
-		const scriptName: any = vars['fileDirname']?.substring(vars['fileDirname']?.lastIndexOf('\\') + 1);
+		const scriptPath: string = vars['fileDirname']??"";
 		if (vscode.window.activeTextEditor) {
 			const currentDocument = vscode.window.activeTextEditor.document;
 			const configuration = vscode.workspace.getConfiguration('', currentDocument.uri);
 			const config_serverIP = configuration.get('cfxcli.ip', "");
 			const config_api_key = configuration.get('cfxcli.api_key', "");
+			const scriptName = find_fxmanifest(scriptPath);
 			axios.post(`${config_serverIP}/stop`, {api_key: config_api_key, target_script: scriptName}).then(function (response: { data: any; }) {
 				//decode data to json
 				const data = response.data;

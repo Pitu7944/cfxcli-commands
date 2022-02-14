@@ -2,7 +2,7 @@
 	"name": "cfxcli-commands",
 	"displayName": "cfxcli-commands",
 	"description": "cfxcli-commands",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"publisher": "Pitu7944",
 	"repository": "https://github.com/Pitu7944/cfxcli-commands",
 	"engines": {
