@@ -2,7 +2,7 @@
 	"name": "cfxcli-commands",
 	"displayName": "cfxcli-commands",
 	"description": "cfxcli-commands",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "Pitu7944",
 	"repository": "https://github.com/Pitu7944/cfxcli-commands",
 	"engines": {
@@ -36,7 +36,7 @@
 			{
 				"id": "cfxcli",
 				"title": "cfxcli Configuration",
-				"properties":{
+				"properties": {
 					"cfxcli.ip": {
 						"type": "string",
 						"default": "http://127.0.0.1:30120/cfxcli_server",

@@ -7,12 +7,6 @@ import axios from 'axios';
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('vscodebuttons-fivem is loaded! | Developed by Pitu7944#2711');
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
 	const disposable = vscode.commands.registerCommand('extension.restartCurrentScript', () => {
 		const vars = {
 			fileDirname: (vscode.window.activeTextEditor) ? path.dirname(vscode.window.activeTextEditor.document.fileName) : null,
@@ -90,7 +84,7 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 		}
 	});
+	context.subscriptions.push(disposable);
 	context.subscriptions.push(disposable2);
 	context.subscriptions.push(disposable3);
-	context.subscriptions.push(disposable);
 }

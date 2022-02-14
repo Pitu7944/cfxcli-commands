@@ -1,27 +1,22 @@
-# Hello World Sample
+# CFXCLI - Extension installation guide
+## 1. Installing the extension to vscode
 
-This is a Hello World example that shows you how to use VS Code API.
+ Open PowerShell and enter the command below
 
-Guide for this sample: https://code.visualstudio.com/api/get-started/your-first-extension.
+```
+code --install-extension ./cfxcli-commands-0.0.4.vsix
+```
+# 2. Configuration
+ 1. Open your project workspace.
+ 2. Open vscode Settings ( default: ctrl + , ) .
+ 3. Go to section `cfxcli Configuration`.
+ 4. Set `Cfxcli: ip` to `http://{your_server_ip}:{your_server_port}/cfxcli_server`.
+ 5. Set `Cfxcli: Api_key` to the key you set up in the`Config.lua` of `cfxcli_server` resource.
 
-## Demo
+# 3. Usage
+### 1. Open Command Palette ( default: f1 )
+Type `cfxcli` and select wanted action :
+ - Start current resource
+ - Stop current resource
+ - Restart current resource
 
-![demo](demo.gif)
-
-## VS Code API
-
-### `vscode` module
-
-- [`commands.registerCommand`](https://code.visualstudio.com/api/references/vscode-api#commands.registerCommand)
-- [`window.showInformationMessage`](https://code.visualstudio.com/api/references/vscode-api#window.showInformationMessage)
-
-### Contribution Points
-
-- [`contributes.commands`](https://code.visualstudio.com/api/references/contribution-points#contributes.commands)
-
-## Running the Sample
-
-- Run `npm install` in terminal to install dependencies
-- Run the `Run Extension` target in the Debug View. This will:
-	- Start a task `npm: watch` to compile the code
-	- Run the extension in a new VS Code window
