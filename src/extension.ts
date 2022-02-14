@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
 import axios from 'axios';
-
+import { env } from 'vscode';
 
 
 function find_fxmanifest(scriptPath: string, currentDepth = 0): string {
@@ -48,7 +48,13 @@ export function activate(context: vscode.ExtensionContext) {
 			const config_serverIP = configuration.get('cfxcli.ip', "");
 			const config_api_key = configuration.get('cfxcli.api_key', "");
 			const fxmanifestpath = find_fxmanifest(scriptPath);
-			const scriptName = fxmanifestpath.substring(fxmanifestpath.lastIndexOf('\\') + 1);
+			const isWindows = () => Boolean(env.appRoot && env.appRoot[0] !== "/");
+			let scriptName = "";
+			if (isWindows()) {
+				scriptName = fxmanifestpath.substring(fxmanifestpath.lastIndexOf('\\') + 1);
+			} else {
+				scriptName = fxmanifestpath.substring(fxmanifestpath.lastIndexOf('/') + 1);
+			}
 			console.log("fxmanifestpath: " + fxmanifestpath);
 			console.log("scriptname: " + scriptName);
 			axios.post(`${config_serverIP}/restart`, {api_key: config_api_key, target_script: scriptName}).then(function (response: { data: any; }) {
@@ -78,7 +84,13 @@ export function activate(context: vscode.ExtensionContext) {
 			const config_serverIP = configuration.get('cfxcli.ip', "");
 			const config_api_key = configuration.get('cfxcli.api_key', "");
 			const fxmanifestpath = find_fxmanifest(scriptPath);
-			const scriptName = fxmanifestpath.substring(fxmanifestpath.lastIndexOf('\\') + 1);
+			const isWindows = () => Boolean(env.appRoot && env.appRoot[0] !== "/");
+			let scriptName = "";
+			if (isWindows()) {
+				scriptName = fxmanifestpath.substring(fxmanifestpath.lastIndexOf('\\') + 1);
+			} else {
+				scriptName = fxmanifestpath.substring(fxmanifestpath.lastIndexOf('/') + 1);
+			}
 			console.log("fxmanifestpath: " + fxmanifestpath);
 			console.log("scriptname: " + scriptName);
 			axios.post(`${config_serverIP}/start`, {api_key: config_api_key, target_script: scriptName}).then(function (response: { data: any; }) {
@@ -108,7 +120,13 @@ export function activate(context: vscode.ExtensionContext) {
 			const config_serverIP = configuration.get('cfxcli.ip', "");
 			const config_api_key = configuration.get('cfxcli.api_key', "");
 			const fxmanifestpath = find_fxmanifest(scriptPath);
-			const scriptName = fxmanifestpath.substring(fxmanifestpath.lastIndexOf('\\') + 1);
+			const isWindows = () => Boolean(env.appRoot && env.appRoot[0] !== "/");
+			let scriptName = "";
+			if (isWindows()) {
+				scriptName = fxmanifestpath.substring(fxmanifestpath.lastIndexOf('\\') + 1);
+			} else {
+				scriptName = fxmanifestpath.substring(fxmanifestpath.lastIndexOf('/') + 1);
+			}
 			console.log("fxmanifestpath: " + fxmanifestpath);
 			console.log("scriptname: " + scriptName);
 			axios.post(`${config_serverIP}/stop`, {api_key: config_api_key, target_script: scriptName}).then(function (response: { data: any; }) {
